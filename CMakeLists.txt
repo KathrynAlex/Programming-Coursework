@@ -9,4 +9,7 @@ add_executable(Programming_Coursework
         io.h
         io.h
         io.h
-        waveform.h)
+        waveform.h
+        io.c
+        waveform.c
+        waveform.c)
