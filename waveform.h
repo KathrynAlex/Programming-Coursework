@@ -5,14 +5,14 @@
 #ifndef PROGRAMMING_COURSEWORK_WAVEFORM_H
 #define PROGRAMMING_COURSEWORK_WAVEFORM_H
 
-float compute_rms(float [], int);
+double compute_rms(double [], int);
 
-float compute_peak_to_peak(float [], int);
+double compute_peak_to_peak(double [], int);
 
-float compute_dc_offset(float [], int);
+double compute_dc_offset(double [], int);
 
-int count_clipped(float [], int, float);
+int count_clipped(double [], int, double);
 
-int check_compliance(float, float);
+int check_compliance(double, double);
 
 #endif //PROGRAMMING_COURSEWORK_WAVEFORM_H
