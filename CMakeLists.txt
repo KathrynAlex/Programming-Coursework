@@ -8,4 +8,5 @@ include_directories(.)
 add_executable(Programming_Coursework
         io.h
         io.h
-        io.h)
+        io.h
+        waveform.h)
