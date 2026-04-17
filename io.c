@@ -15,7 +15,18 @@ typedef struct {
 }waveform_data;
 
 waveform_data read_file() {
-    char filename[];
+    char filename[50];
     printf("Enter filename: ");
     scanf("%s", &filename);
+    printf("%s \n", filename);
+    FILE *fptr = fopen(filename, "r");
+    if (fptr == NULL) {
+        printf("File not found \n");
+    } else {
+        printf("File opened \n");
+        fclose(fptr);
+        printf("File closed \n");
+    };
+    waveform_data temp;
+    return temp;
 };
