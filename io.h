@@ -6,7 +6,7 @@
 #define PROGRAMMING_COURSEWORK_IO_H
 
 typedef struct {
-    float timestamp[1000];
+    double timestamp[1000];
     double phase_A_voltage[1000];
     double phase_B_voltage[1000];
     double phase_C_voltage[1000];
@@ -17,5 +17,7 @@ typedef struct {
 }waveform_data;
 
 waveform_data read_file();
+
+int write_file(double[], double[], double[], int[], int[]);
 
 #endif //PROGRAMMING_COURSEWORK_IO_H
