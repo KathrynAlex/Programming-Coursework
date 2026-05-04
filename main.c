@@ -32,15 +32,15 @@ int main(void) {
     double Vpp_values[] = {Vpp_A, Vpp_B, Vpp_C};
 
     // calculating the DC offset for each waveform
-    double dc_offset_A = compute_dc_offset(&wave_data->phase_A_voltage, sample_size, interval);
-    double dc_offset_B = compute_dc_offset(&wave_data->phase_B_voltage, sample_size, interval);
-    double dc_offset_C = compute_dc_offset(&wave_data->phase_C_voltage, sample_size, interval);
+    double dc_offset_A = compute_dc_offset(&wave_data[0].phase_A_voltage, sample_size, interval);
+    double dc_offset_B = compute_dc_offset(&wave_data[0].phase_B_voltage, sample_size, interval);
+    double dc_offset_C = compute_dc_offset(&wave_data[0].phase_C_voltage, sample_size, interval);
     double dc_offset_values[] = {dc_offset_A, dc_offset_B, dc_offset_C};
 
     // Calculating the number of times each waveform gave a value outside of the sensor imit
-    int clip_count_A = count_clipped(&wave_data->phase_C_voltage, sample_size, interval, voltage_limit);
-    int clip_count_B = count_clipped(&wave_data->phase_B_voltage, sample_size, interval, voltage_limit);
-    int clip_count_C = count_clipped(&wave_data->phase_C_voltage, sample_size, interval, voltage_limit);
+    int clip_count_A = count_clipped(&wave_data[0].phase_A_voltage, sample_size, interval, voltage_limit);
+    int clip_count_B = count_clipped(&wave_data[0].phase_B_voltage, sample_size, interval, voltage_limit);
+    int clip_count_C = count_clipped(&wave_data[0].phase_C_voltage, sample_size, interval, voltage_limit);
     int clip_count_values[] = {clip_count_A, clip_count_B, clip_count_C};
 
     // Checking whether the RMS value for each waveform is compliant with the standards given
