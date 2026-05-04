@@ -19,6 +19,7 @@ typedef struct {
 }waveform_data;
 
 waveform_data *read_file() {
+    // IMPORTANT: Requires filename to be edited to work in a different directory
     // Reads in the data from the csv file and sorts it into an array of instances of waveform_data
     // Returns a pointer to the first element of the array
 
@@ -29,6 +30,7 @@ waveform_data *read_file() {
     };
 
     // Opening the csv file
+    // Change filename up to "power_quality_log.csv" to the current project filepath
     char filename[] = "C:\\Users\\lkwhe\\OneDrive - UWE Bristol\\Programming for Engineers\\Coursework\\Programming-Coursework\\power_quality_log.csv";
     printf("%s \n", filename);
     FILE *fptr = fopen(filename, "r");
@@ -101,11 +103,14 @@ waveform_data *read_file() {
 };
 
 int write_file(double RMS[], double Vpp[], double dc_offset[], int clip_count[], int compliance[]) {
+    // IMPORTANT: Requires filename to be edited to work in a different directory
     // Writes the calculated results into a text file
     // Returns 1 if successful or 0 if unsuccessful
 
     // Creating the text file
     FILE* fptr;
+
+    // Change filename up to "results.txt" to the current project filepath
     char filename[] = "C:\\Users\\lkwhe\\OneDrive - UWE Bristol\\Programming for Engineers\\Coursework\\Programming-Coursework\\results.txt";
     fptr = fopen(filename, "w");
     int success = 0;
