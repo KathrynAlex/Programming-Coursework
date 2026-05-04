@@ -7,21 +7,24 @@
 #include <stdlib.h>
 
 typedef struct {
-    double timestamp[1000];
-    double phase_A_voltage[1000];
-    double phase_B_voltage[1000];
-    double phase_C_voltage[1000];
-    double line_current[1000];
-    double frequency[1000];
-    double power_factor[1000];
-    double thd_percent[1000];
+    double timestamp;
+    double phase_A_voltage;
+    double phase_B_voltage;
+    double phase_C_voltage;
+    double line_current;
+    double frequency;
+    double power_factor;
+    double thd_percent;
 }waveform_data;
 
-waveform_data read_file() {
-    waveform_data wave_data;
+waveform_data *read_file() {
+    waveform_data *wave_data = malloc(1000*64);
     char filename[] = "C:\\Users\\lkwhe\\OneDrive - UWE Bristol\\Programming for Engineers\\Coursework\\Programming-Coursework\\power_quality_log.csv";
     printf("%s \n", filename);
     FILE *fptr = fopen(filename, "r");
+    if (wave_data == NULL) {
+        printf("Memory allocation failed\n");
+    };
 
     if (fptr == NULL) {
         printf("File not found \n");
@@ -31,27 +34,27 @@ waveform_data read_file() {
         fgets(row, 256, fptr);
         char *token = strtok(row, ",");
         int i = 0;
-        double* order[8];
+        double *order[8];
         while(token != NULL) {
             if (strcmp(&token[strlen(token)-1], "\n") == 0) {
                 token[strlen(token)-1] = 0;
             };
             if (strcmp(token, "timestamp") == 0) {
-                order[i] = wave_data.timestamp;
+                order[i] = &wave_data[0].timestamp;
             } else if (strcmp(token, "phase_A_voltage") == 0) {
-                order[i] = wave_data.phase_A_voltage;
+                order[i] = &wave_data[0].phase_A_voltage;
             } else if (strcmp(token, "phase_B_voltage") == 0) {
-                order[i] = wave_data.phase_B_voltage;
+                order[i] = &wave_data[0].phase_B_voltage;
             } else if (strcmp(token, "phase_C_voltage") == 0) {
-                order[i] = wave_data.phase_C_voltage;
+                order[i] = &wave_data[0].phase_C_voltage;
             } else if (strcmp(token, "frequency") == 0) {
-                order[i] = wave_data.frequency;
+                order[i] = &wave_data[0].frequency;
             } else if (strcmp(token, "line_current") == 0) {
-                order[i] = wave_data.line_current;
+                order[i] = &wave_data[0].line_current;
             } else if (strcmp(token, "power_factor") == 0) {
-                order[i] = wave_data.power_factor;
+                order[i] = &wave_data[0].power_factor;
             } else if (strcmp(token, "thd_percent") == 0) {
-                order[i] = wave_data.thd_percent;
+                order[i] = &wave_data[0].thd_percent;
             } else {
                 printf("%s \n", token);
             };
@@ -70,12 +73,15 @@ waveform_data read_file() {
                     token[strlen(token)-1] = 0;
                 };
                 value = strtod(token, &ptr);
-                *(order[i]+j) = value;
+//                printf("%lf\n", *(order[i]+j*64));
+//                printf("%lf\n", value);
+                order[i][j*8] = value;
                 token = strtok(NULL, ",");
                 i += 1;
             };
             j += 1;
         };
+        printf("Yep\n");
 //        printf("%lf \n", wave_data.phase_C_voltage[100]);
         fclose(fptr);
         printf("File closed \n");
